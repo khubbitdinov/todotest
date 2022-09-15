@@ -52,7 +52,7 @@
             <label v-bind:for="'item_' + item.id"></label>
             <span class="todo-text">{{ item.title }}</span>
             <span class="delete" @click="deleteItem(item)"></span>
-            <span class="edit" @click="editItem(item)"></span>
+            <!-- <span class="edit" @click="editItem(item)"></span> -->
           </li>
         </transition-group>
       </div>
@@ -115,6 +115,7 @@ export default {
       this.dialog.title = "Do you really want to undo your changes?";
       this.dialog.event = "Reset";
       this.dialog.show = true;
+      this.new_todo = " ";
     },
     closeConfirmDialog(answer) {
       this.dialog.show = false;
@@ -206,9 +207,13 @@ export default {
     addItem() {
       let title = this.new_todo;
       if (title) {
-        this.form.list.push({ title, done: false });
+        this.form.list.push({ title, done: false, id: Date.now() });
       }
       this.new_todo = "";
+    },
+    editItem(item) {
+      this.new_todo = item.title;
+      this.deleteItem(item);
     },
     deleteItem(item) {
       this.form.list.splice(this.form.list.indexOf(item), 1);

@@ -15,7 +15,7 @@
           type="checkbox"
         />
         <label v-bind:for="'item_' + item.id"></label>
-        <span class="todo-text">{{ item.title }}</span>
+        <span class="todo-text">{{ list.title }}</span>
       </li>
     </ul>
   </div>
